@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   template: `
     <form (ngSubmit)="submit()">
       <input
@@ -21,6 +22,8 @@ import { AuthService } from '../../core/auth/auth.service';
       />
 
       <button type="submit">Login</button>
+
+      <a routerLink="/register">S'inscrire</a>
     </form>
   `
 })
@@ -28,7 +31,7 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   submit() {
     this.auth.login({

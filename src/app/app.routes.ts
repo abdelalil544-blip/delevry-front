@@ -8,13 +8,17 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   { path: 'login', component: LoginComponent },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent)
+  },
 
   {
     path: 'admin',
     canActivate: [authGuard, roleGuard(['ADMIN'])],
     loadChildren: () =>
       import('./features/admin/admin.routes')
-        .then(m => m.routes) 
+        .then(m => m.routes)
   },
 
   {

@@ -1,0 +1,56 @@
+<div class="register-container">
+  <h2>Inscription</h2>
+  <p>Créer un nouveau compte</p>
+
+  <form (ngSubmit)="submit()" #registerForm="ngForm">
+
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" [(ngModel)]="registerData.nom" required>
+    </div>
+
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" name="prenom" [(ngModel)]="registerData.prenom" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="registerData.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" [(ngModel)]="registerData.password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="telephone">Téléphone</label>
+      <input type="tel" id="telephone" name="telephone" [(ngModel)]="registerData.telephone" required>
+    </div>
+
+    <div class="form-group">
+      <label for="adresse">Adresse</label>
+      <input type="text" id="adresse" name="adresse" [(ngModel)]="registerData.adresse" required>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Rôle</label>
+      <select id="role" name="role" [(ngModel)]="registerData.role" required>
+        @for (role of roles; track role) {
+        <option [value]="role">{{ role }}</option>
+        }
+      </select>
+    </div>
+
+    @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+    }
+
+    <button type="submit" [disabled]="!registerForm.form.valid">S'inscrire</button>
+  </form>
+
+  <div class="links">
+    <a routerLink="/login">Déjà un compte ? Se connecter</a>
+  </div>
+</div>

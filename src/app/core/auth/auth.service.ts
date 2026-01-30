@@ -14,7 +14,7 @@ export class AuthService {
 
   isAuthenticated = computed(() => !!this.token());
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data)
@@ -28,7 +28,12 @@ export class AuthService {
         this.role.set(decoded.role);
 
         this.redirectByRole(decoded.role);
+        this.redirectByRole(decoded.role);
       });
+  }
+
+  register(data: any) {
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
   logout() {
