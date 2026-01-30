@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -18,18 +19,19 @@ export class AuthService {
 
   login(data: LoginRequest) {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data)
-      .subscribe(res => {
-        const decoded = jwtDecode<JwtPayload>(res.token);
+      .pipe(
+        tap(res => {
+          const decoded = jwtDecode<JwtPayload>(res.token);
 
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('role', decoded.role);
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', decoded.role);
 
-        this.token.set(res.token);
-        this.role.set(decoded.role);
+          this.token.set(res.token);
+          this.role.set(decoded.role);
 
-        this.redirectByRole(decoded.role);
-        this.redirectByRole(decoded.role);
-      });
+          this.redirectByRole(decoded.role);
+        })
+      );
   }
 
   register(data: any) {

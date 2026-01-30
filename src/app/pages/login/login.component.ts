@@ -22,6 +22,10 @@ import { AuthService } from '../../core/auth/auth.service';
       />
 
       <button type="submit">Login</button>
+      
+      @if (errorMessage) {
+        <p style="color: red; margin-top: 10px;">{{ errorMessage }}</p>
+      }
 
       <a routerLink="/register">S'inscrire</a>
     </form>
@@ -30,6 +34,7 @@ import { AuthService } from '../../core/auth/auth.service';
 export class LoginComponent {
   email = '';
   password = '';
+  errorMessage = '';
 
   constructor(private auth: AuthService) { }
 
@@ -37,6 +42,14 @@ export class LoginComponent {
     this.auth.login({
       email: this.email,
       password: this.password
+    }).subscribe({
+      next: () => {
+        // Redirection handled in AuthService tap
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+        this.errorMessage = 'Email ou mot de passe incorrect.';
+      }
     });
   }
 }
