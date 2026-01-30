@@ -25,6 +25,15 @@ import { AuthService } from '../../core/auth/auth.service';
           <a routerLink="colis/create" routerLinkActive="active">
             <i class="icon">➕</i> Nouvelle Expédition
           </a>
+          <a routerLink="produits" routerLinkActive="active">
+            <i class="icon">🛒</i> Catalogue Produits
+          </a>
+          <a routerLink="zones" routerLinkActive="active">
+            <i class="icon">🗺️</i> Zones de Livraison
+          </a>
+          <a routerLink="historique" routerLinkActive="active">
+            <i class="icon">📜</i> Historique
+          </a>
           <a routerLink="profile" routerLinkActive="active">
             <i class="icon">👤</i> Mon Profil
           </a>
