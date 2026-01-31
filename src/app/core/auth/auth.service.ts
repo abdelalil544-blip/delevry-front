@@ -38,6 +38,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
 
+  getToken(): string | null {
+    return this.token();
+  }
+
   logout() {
     localStorage.clear();
     this.token.set(null);
