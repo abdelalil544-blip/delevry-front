@@ -20,6 +20,10 @@ export class ColisService {
         });
     }
 
+    create(colis: any): Observable<Colis> {
+        return this.http.post<Colis>(this.apiUrl, colis, { headers: this.getHeaders() });
+    }
+
     getAllColis(page: number = 0, size: number = 10): Observable<Page<Colis>> {
         let params = new HttpParams()
             .set('page', page.toString())
@@ -31,7 +35,7 @@ export class ColisService {
         });
     }
 
-    getMyColis(page: number = 0, size: number = 10): Observable<Page<Colis>> {
+    getMyClientColis(page: number = 0, size: number = 10): Observable<Page<Colis>> {
         let params = new HttpParams()
             .set('page', page.toString())
             .set('size', size.toString());
@@ -40,6 +44,44 @@ export class ColisService {
             headers: this.getHeaders(),
             params: params
         });
+    }
+
+    getLivreurColis(page: number = 0, size: number = 10): Observable<Page<Colis>> {
+        let params = new HttpParams()
+            .set('page', page.toString())
+            .set('size', size.toString());
+
+        return this.http.get<Page<Colis>>(`${this.apiUrl}/livreur/me`, {
+            headers: this.getHeaders(),
+            params: params
+        });
+    }
+
+    getDestinataireColis(page: number = 0, size: number = 10): Observable<Page<Colis>> {
+        let params = new HttpParams()
+            .set('page', page.toString())
+            .set('size', size.toString());
+
+        return this.http.get<Page<Colis>>(`${this.apiUrl}/destinataire/me`, {
+            headers: this.getHeaders(),
+            params: params
+        });
+    }
+
+    updateStatut(colisId: string, statut: StatutColis, commentaire?: string): Observable<Colis> {
+        let params = new HttpParams().set('statut', statut);
+        if (commentaire) {
+            params = params.set('commentaire', commentaire);
+        }
+
+        return this.http.post<Colis>(`${this.apiUrl}/${colisId}/statut`, {}, {
+            headers: this.getHeaders(),
+            params: params
+        });
+    }
+
+    getMyHistory(): Observable<Page<any>> {
+        return this.http.get<Page<any>>(`http://localhost:8080/api/historique-livraisons/me`, { headers: this.getHeaders() });
     }
 
     getColisById(id: string): Observable<Colis> {

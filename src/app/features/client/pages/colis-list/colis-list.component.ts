@@ -53,10 +53,12 @@ import { Colis, Page } from '../../../admin/models/colis.model';
     .colis-table th, .colis-table td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
     .colis-table th { background: #f8f9fa; color: #333; }
     .status-badge { padding: 4px 8px; border-radius: 12px; font-size: 0.85rem; font-weight: 500; }
-    .status-badge.en-attente { background: #fff3cd; color: #856404; }
-    .status-badge.en-cours { background: #cce5ff; color: #004085; }
-    .status-badge.livre { background: #d4edda; color: #155724; }
-    .status-badge.annule { background: #f8d7da; color: #721c24; }
+    .status-badge.cree { background: #fef9c3; color: #854d0e; }
+    .status-badge.collecte { background: #dbeafe; color: #1e40af; }
+    .status-badge.en-stock { background: #ede9fe; color: #5b21b6; }
+    .status-badge.en-transit { background: #e0f2fe; color: #075985; }
+    .status-badge.livre { background: #dcfce7; color: #166534; }
+    .status-badge.annule { background: #fee2e2; color: #991b1b; }
     .btn-sm { padding: 5px 10px; font-size: 0.85rem; cursor: pointer; }
     .loading, .empty { text-align: center; padding: 20px; color: #666; }
   `]
@@ -73,7 +75,7 @@ export class ColisListComponent implements OnInit {
 
   loadColis() {
     this.loading = true;
-    this.colisService.getMyColis(0, 50).subscribe({
+    this.colisService.getMyClientColis(0, 50).subscribe({
       next: (page: Page<Colis>) => {
         this.colis = page.content;
         this.loading = false;

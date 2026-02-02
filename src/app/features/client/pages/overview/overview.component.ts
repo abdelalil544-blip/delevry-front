@@ -54,11 +54,11 @@ export class OverviewComponent implements OnInit {
 
   loadStats() {
     this.loading = true;
-    this.colisService.getMyColis(0, 1000).subscribe({
+    this.colisService.getMyClientColis(0, 1000).subscribe({
       next: (page: Page<Colis>) => {
         const colis = page.content;
         this.stats.total = page.totalElements;
-        this.stats.enCours = colis.filter(c => c.statut === StatutColis.EN_COURS || c.statut === StatutColis.EN_ATTENTE).length;
+        this.stats.enCours = colis.filter(c => c.statut !== StatutColis.LIVRE && c.statut !== StatutColis.ANNULE).length;
         this.stats.livres = colis.filter(c => c.statut === StatutColis.LIVRE).length;
         this.loading = false;
       },

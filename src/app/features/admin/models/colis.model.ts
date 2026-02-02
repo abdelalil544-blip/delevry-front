@@ -1,14 +1,16 @@
 export enum StatutColis {
-    EN_ATTENTE = 'EN_ATTENTE',
-    EN_COURS = 'EN_COURS',
+    CREE = 'CREE',
+    COLLECTE = 'COLLECTE',
+    EN_STOCK = 'EN_STOCK',
+    EN_TRANSIT = 'EN_TRANSIT',
     LIVRE = 'LIVRE',
     ANNULE = 'ANNULE'
 }
 
 export enum PrioriteColis {
-    BASSE = 'BASSE',
-    MOYENNE = 'MOYENNE',
-    HAUTE = 'HAUTE'
+    NORMALE = 'NORMALE',
+    URGENTE = 'URGENTE',
+    EXPRESS = 'EXPRESS'
 }
 
 export interface ColisProduit {

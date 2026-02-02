@@ -20,6 +20,21 @@ export class UserService {
         });
     }
 
+    getCurrentClient(): Observable<ClientExpediteur> {
+        return this.http.get<ClientExpediteur>(
+            `${this.baseUrl}/clients/me`,
+            { headers: this.getHeaders() }
+        );
+    }
+
+    updateClient(id: string, client: ClientExpediteur): Observable<ClientExpediteur> {
+        return this.http.put<ClientExpediteur>(
+            `${this.baseUrl}/clients/${id}`,
+            client,
+            { headers: this.getHeaders() }
+        );
+    }
+
     // ==================== CLIENTS ====================
     getAllClients(page = 0, size = 10): Observable<Page<ClientExpediteur>> {
         return this.http.get<Page<ClientExpediteur>>(
