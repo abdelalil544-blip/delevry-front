@@ -1,56 +1,119 @@
-<div class="register-container">
-  <h2>Inscription</h2>
-  <p>Créer un nouveau compte</p>
-
-  <form (ngSubmit)="submit()" #registerForm="ngForm">
-
-    <div class="form-group">
-      <label for="nom">Nom</label>
-      <input type="text" id="nom" name="nom" [(ngModel)]="registerData.nom" required>
+<div class="register-page">
+  <div class="register-card">
+    <div class="register-header">
+      <h1>Créer un compte</h1>
+      <p>Rejoignez Smart Delivery en quelques secondes.</p>
     </div>
 
-    <div class="form-group">
-      <label for="prenom">Prénom</label>
-      <input type="text" id="prenom" name="prenom" [(ngModel)]="registerData.prenom" required>
+    <form (ngSubmit)="submit()" #registerForm="ngForm" class="register-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input
+            type="text"
+            id="nom"
+            name="nom"
+            [(ngModel)]="registerData.nom"
+            placeholder="Dupont"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input
+            type="text"
+            id="prenom"
+            name="prenom"
+            [(ngModel)]="registerData.prenom"
+            placeholder="Jean"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="registerData.email"
+          placeholder="vous@example.com"
+          required
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="telephone">Téléphone</label>
+          <input
+            type="tel"
+            id="telephone"
+            name="telephone"
+            [(ngModel)]="registerData.telephone"
+            placeholder="+33 6 12 34 56 78"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="role">Rôle</label>
+          <select
+            id="role"
+            name="role"
+            [(ngModel)]="registerData.role"
+            required
+          >
+            @for (role of roles; track role) {
+              <option [value]="role">
+                {{ role }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input
+          type="text"
+          id="adresse"
+          name="adresse"
+          [(ngModel)]="registerData.adresse"
+          placeholder="12 rue des Colis, Paris"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="registerData.password"
+          placeholder="Choisissez un mot de passe sécurisé"
+          required
+        />
+      </div>
+
+      @if (errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <button
+        type="submit"
+        class="primary-button"
+        [disabled]="!registerForm.form.valid"
+      >
+        S'inscrire
+      </button>
+    </form>
+
+    <div class="register-footer">
+      <span>Déjà un compte ?</span>
+      <a routerLink="/login">Se connecter</a>
     </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" [(ngModel)]="registerData.email" required>
-    </div>
-
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" name="password" [(ngModel)]="registerData.password" required>
-    </div>
-
-    <div class="form-group">
-      <label for="telephone">Téléphone</label>
-      <input type="tel" id="telephone" name="telephone" [(ngModel)]="registerData.telephone" required>
-    </div>
-
-    <div class="form-group">
-      <label for="adresse">Adresse</label>
-      <input type="text" id="adresse" name="adresse" [(ngModel)]="registerData.adresse" required>
-    </div>
-
-    <div class="form-group">
-      <label for="role">Rôle</label>
-      <select id="role" name="role" [(ngModel)]="registerData.role" required>
-        @for (role of roles; track role) {
-        <option [value]="role">{{ role }}</option>
-        }
-      </select>
-    </div>
-
-    @if (errorMessage) {
-    <p class="error">{{ errorMessage }}</p>
-    }
-
-    <button type="submit" [disabled]="!registerForm.form.valid">S'inscrire</button>
-  </form>
-
-  <div class="links">
-    <a routerLink="/login">Déjà un compte ? Se connecter</a>
   </div>
 </div>
